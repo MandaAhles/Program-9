@@ -31,35 +31,6 @@ public class ParagraphDriver {
 		}
 		styles=readStyles(styleFileIn);
 		System.out.println(styles);
-		/*
-		String para2="5 65 5";//left indent=5, line length=65, firstLineAdjustment=5
-		String para3="5 70 -3";
-		
-		ParaStyle style1=new ParaStyle("para1", 0, 70, 0);
-		ParaStyle style2=new ParaStyle("para2", 5, 65, 5);
-		
-		//test the format with double "paragraphs"
-		String words=".P para1 " +
-				"It is a truth universally acknowledged, that a single man in possession" +
-				" of a good fortune, must be in want of a wife. " +
-				".P para2 " +
-				"However little known the feelings or views of such a man may be on his first entering a neighbourhood, " +
-				"this truth is so well fixed in the minds of the surrounding families, that he is considered the rightful " +
-				"property of some one or other of their daughters.";
-		String format="";
-		System.out.println(words);
-		int posDotP=words.indexOf(".P");
-		String first=words.substring(posDotP, words.indexOf(".P", posDotP+1));
-		Paragraph p1=new Paragraph();
-		p1.startParagraph(first);
-		
-		posDotP=words.indexOf(".P", posDotP+1);
-		
-		String second=words.substring(posDotP, words.indexOf(".P", posDotP+1));
-		Paragraph p2=new Paragraph();
-		p2.startParagraph(second);
-		System.out.println(p1.format(style1));
-		System.out.println(p2.format(style2));*/
 		
 	}//end main
 	public static ArrayList<ParaStyle> readStyles(Scanner styleScanner){
