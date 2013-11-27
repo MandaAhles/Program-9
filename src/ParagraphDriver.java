@@ -1,8 +1,6 @@
 import java.util.*;
 //import java.io.*;
 
-// Aaron's random change!! :-)
-
 public class ParagraphDriver {
 /**
  * read style file card create objects for them
