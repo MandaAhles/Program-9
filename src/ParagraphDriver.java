@@ -32,7 +32,7 @@ public class ParagraphDriver {
 			return;
 		}
 		styles=readStyles(styleFileIn);
-		
+		formatDocument(docFileIn, fileOut, styles);
 		
 		//read in document one line at a time, using formatDocument()
 		
@@ -45,7 +45,8 @@ public class ParagraphDriver {
 		}
 		return styles;
 	}
-	public static void formatDocument(Scanner docScanner, PrintWriter outputFileWriter, ArrayList<ParaStyle> styles){
+	public static void formatDocument(Scanner docScanner, PrintWriter outputFileWriter, 
+			ArrayList<ParaStyle> styles){
 		//read in from docScanner line by line.
 		String nextLine="";
 		String firstLine="";
@@ -53,6 +54,7 @@ public class ParagraphDriver {
 		ParaStyle paraStyle=null;
 		boolean styleMatch=false;
 		Paragraph p;
+		String paragraph="";
 		//put while (docScanner.hasNext()) here
 		//look for ".P"
 		nextLine=docScanner.next();
@@ -71,12 +73,23 @@ public class ParagraphDriver {
 			//get next lines.
 			nextLine=docScanner.next();
 			if(nextLine.indexOf(".P")<0){
-				//not a new paragr
+				//not a new paragr, first line of paragraph.
 				firstLine=nextLine;
 				p.startParagraph(firstLine);
+				nextLine=docScanner.nextLine();
+				
 			}
-			else//
-				p.format(paraStyle);
+			//no else. always going to be at least one line after .P line.
+			
+			//keep going.
+			while(nextLine.indexOf(".P")<0){
+				p.addWords(nextLine);
+				nextLine=docScanner.nextLine();
+			}
+			//kicked out of loop, so must have ".P". Format paragraph as is first.
+			paragraph=p.format(paraStyle);
+			//print (to output1)
+			System.out.println(paragraph);
 		}
 		//no else
 		
