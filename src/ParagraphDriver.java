@@ -32,11 +32,10 @@ public class ParagraphDriver {
 			return;
 		}
 		styles=readStyles(styleFileIn);
-		System.out.println(styles);
+		
 		
 		//read in document one line at a time, using formatDocument()
-		//if line has ".P"
-		//search for the style name "para1" or "para2" of "para3"
+		
 	}//end main
 	public static ArrayList<ParaStyle> readStyles(Scanner styleScanner){
 		ArrayList<ParaStyle> styles= new ArrayList<ParaStyle>();
@@ -48,6 +47,39 @@ public class ParagraphDriver {
 	}
 	public static void formatDocument(Scanner docScanner, PrintWriter outputFileWriter, ArrayList<ParaStyle> styles){
 		//read in from docScanner line by line.
+		String nextLine="";
+		String firstLine="";
+		String styleIndicate="";
+		ParaStyle paraStyle=null;
+		boolean styleMatch=false;
+		Paragraph p;
+		//put while (docScanner.hasNext()) here
+		//look for ".P"
+		nextLine=docScanner.next();
+		//if line has ".P"
+		if (nextLine.indexOf(".P")>=0){//contains ".P"
+			//search for the style name (ie: "para1" or "para2" of "para3")
+			p=new Paragraph();
+			styleIndicate=nextLine.substring(nextLine.indexOf(".P")+2, nextLine.length()).trim();
+			styleMatch=false;
+			for(int i=0; i<styles.size() && styleMatch==false; i++){
+				if(styles.get(i).getName().equals(styleIndicate)){//set paraStyle for use in p.format
+					paraStyle=styles.get(i);
+					styleMatch=true;
+				}
+			}
+			//get next lines.
+			nextLine=docScanner.next();
+			if(nextLine.indexOf(".P")<0){
+				//not a new paragr
+				firstLine=nextLine;
+				p.startParagraph(firstLine);
+			}
+			else//
+				p.format(paraStyle);
+		}
+		//no else
+		
 	}
  /* (index of for ".P")
  * if line has ".P"
