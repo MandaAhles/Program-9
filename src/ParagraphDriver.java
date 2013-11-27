@@ -1,16 +1,37 @@
 import java.util.*;
-//import java.io.*;
+import java.io.*;
 
 public class ParagraphDriver {
 /**
+ *updated 11/27
+ *
  * read style file card create objects for them
  * reading lines(getty.txt)
  */
 	public static void main(String[] args){
+		ArrayList<ParaStyle> styles;
+		Scanner styleFileIn;
+		Scanner docFileIn;
+		PrintWriter fileOut;
 		Scanner sc=new Scanner(System.in);
-		//System.out.println("Enter the style file to be used: ");
+		System.out.println("Enter the style file to be used: ");
 		//String fileName=sc.next();
-		//String para1="0 70 0";
+		try{
+			styleFileIn=new Scanner(new FileReader(sc.next()));
+			System.out.println("Enter the document file to be used: ");
+			docFileIn= new Scanner (new FileReader(sc.next()));
+			System.out.println("Enter output file name: ");
+			fileOut=new PrintWriter(sc.next());
+		}catch(FileNotFoundException e){
+			System.out.println(e.getMessage());
+			return;
+		}catch(IOException e){//this should go somewhere else.
+			System.out.println(e.getMessage());
+			return;
+		}
+		styles=readStyles(styleFileIn);
+		System.out.println(styles);
+		/*
 		String para2="5 65 5";//left indent=5, line length=65, firstLineAdjustment=5
 		String para3="5 70 -3";
 		
@@ -38,9 +59,17 @@ public class ParagraphDriver {
 		Paragraph p2=new Paragraph();
 		p2.startParagraph(second);
 		System.out.println(p1.format(style1));
-		System.out.println(p2.format(style2));
+		System.out.println(p2.format(style2));*/
 		
-	
+	}//end main
+	public static ArrayList<ParaStyle> readStyles(Scanner styleScanner){
+		ArrayList<ParaStyle> styles= new ArrayList<ParaStyle>();
+		for (int i=0; styleScanner.hasNextLine(); i++){
+			styles.add(new ParaStyle(styleScanner.next(), styleScanner.nextInt(), 
+					styleScanner.nextInt(), styleScanner.nextInt()));
+		}
+		return styles;
+	}
  /* (index of for ".P")
  * if line has ".P"
  * search for the style name "para1" or "para2" of "para3"
@@ -74,5 +103,5 @@ public class ParagraphDriver {
  * 
  * 
  */
-	}
+	
 }
