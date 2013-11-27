@@ -14,6 +14,8 @@ public class ParagraphDriver {
 		Scanner docFileIn;
 		PrintWriter fileOut;
 		Scanner sc=new Scanner(System.in);
+		//get style type files
+		
 		System.out.println("Enter the style file to be used: ");
 		//String fileName=sc.next();
 		try{
@@ -32,6 +34,9 @@ public class ParagraphDriver {
 		styles=readStyles(styleFileIn);
 		System.out.println(styles);
 		
+		//read in document one line at a time, using formatDocument()
+		//if line has ".P"
+		//search for the style name "para1" or "para2" of "para3"
 	}//end main
 	public static ArrayList<ParaStyle> readStyles(Scanner styleScanner){
 		ArrayList<ParaStyle> styles= new ArrayList<ParaStyle>();
@@ -40,6 +45,9 @@ public class ParagraphDriver {
 					styleScanner.nextInt(), styleScanner.nextInt()));
 		}
 		return styles;
+	}
+	public static void formatDocument(Scanner docScanner, PrintWriter outputFileWriter, ArrayList<ParaStyle> styles){
+		//read in from docScanner line by line.
 	}
  /* (index of for ".P")
  * if line has ".P"
