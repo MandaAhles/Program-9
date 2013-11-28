@@ -3,8 +3,7 @@
  * sec 805
  * 		
  * created by Amanda McTavish
- * updated 11/21
- * notes: the formatting is primitavely working. 
+ * updated 11/28
  * 
  *
  */
@@ -69,46 +68,34 @@ public class Paragraph {
 			firstLine+=firstLineIndent;
 			//this only works if the left indent+first line indent is greater than 0.
 		}
-		else //(first line indent is 0)
+		else{ //(first line indent is 0)
 			firstLine=allLineIndent+firstLineIndent;
-		
+		}
 		//add it all as the paragraph.
 		words=firstLine+words;
-			//System.out.println(words+"\n");
 		
 		if (words.length()<=ps.getLineLength()){
 			paragraph=words;
-				//System.out.println("this is short enough)");
 		}
 		
 		else{
 			do{
 				//find last space between 0-ps.getLineLength, break substring at that space
 				int posLineBreak=(words).lastIndexOf(" ", (ps.getLineLength()));
-					//System.out.println(posLineBreak);
 				
 				//add \n to end of firstLine, and end of nextLine
 				lineBreak=words.substring(0, posLineBreak+1);
-					//System.out.println(lineBreak);
+					
 				paragraph+=lineBreak+"\n"+allLineIndent;
 				nextLine=words.substring(posLineBreak+1);
-				//paragraph+=nextLine;
+				
 				words=nextLine;
 			}while(words.length()>=ps.getLineLength());
-			//paragraph+=firstLine+nextLine;
-			paragraph+=nextLine;
 			
+			paragraph+=nextLine;
 		}
-		//paragraph+=firstLine+words;
-		//System.out.println();
 		paragraph+="\n";//final space after paragraph.
 		return paragraph;
 	}//end format
-	
-	/*public String toString(String p){
-		String str="";
-		str+=p;
-		return p;
-	}*/
 
 }
