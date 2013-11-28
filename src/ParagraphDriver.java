@@ -57,12 +57,13 @@ public class ParagraphDriver {
 		String paragraph="";
 		//put while (docScanner.hasNext()) here
 		//look for ".P"
-		nextLine=docScanner.next();
+		nextLine=docScanner.nextLine();
+		int posDotP=0;
 		//if line has ".P"
-		if (nextLine.indexOf(".P")>=0){//contains ".P"
+		if (posDotP>=0){//contains ".P"
 			//search for the style name (ie: "para1" or "para2" of "para3")
 			p=new Paragraph();
-			styleIndicate=nextLine.substring(nextLine.indexOf(".P")+2, nextLine.length()).trim();
+			styleIndicate=nextLine.substring(posDotP+2, nextLine.length()).trim();
 			styleMatch=false;
 			for(int i=0; i<styles.size() && styleMatch==false; i++){
 				if(styles.get(i).getName().equals(styleIndicate)){//set paraStyle for use in p.format
@@ -71,7 +72,7 @@ public class ParagraphDriver {
 				}
 			}
 			//get next lines.
-			nextLine=docScanner.next();
+			nextLine=docScanner.nextLine();
 			if(nextLine.indexOf(".P")<0){
 				//not a new paragr, first line of paragraph.
 				firstLine=nextLine;
