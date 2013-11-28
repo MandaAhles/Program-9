@@ -3,7 +3,11 @@ import java.io.*;
 
 public class ParagraphDriver {
 /**
+ *Comp Sci 251
+ *sec. 805
+ *created by Amanda McTavish
  *updated 11/28
+ *
  
  */
 	public static void main(String[] args){
@@ -33,8 +37,12 @@ public class ParagraphDriver {
 		formatDocument(docFileIn, fileOut, styles);
 		
 		//read in document one line at a time, using formatDocument()
-		
+		styleFileIn.close();
+		docFileIn.close();
+		sc.close();
+		System.out.println("Document fomatting complete.");
 	}//end main
+	
 	public static ArrayList<ParaStyle> readStyles(Scanner styleScanner){
 		ArrayList<ParaStyle> styles= new ArrayList<ParaStyle>();
 		for (int i=0; styleScanner.hasNextLine(); i++){
@@ -97,7 +105,7 @@ public class ParagraphDriver {
 				outputFileWriter.flush();
 			}
 		}while(docScanner.hasNext());
-		System.out.println("Document fomatting complete.");
+		
 	}
  
 }

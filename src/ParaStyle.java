@@ -1,6 +1,6 @@
 
 public class ParaStyle {
-	private String name;//style name ie: para1
+	private String name;//style name ie: para1 or "narrow"
 	private int leftIndent;
 	private int lineLength;
 	private int firstLineAdjustment;

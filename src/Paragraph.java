@@ -21,26 +21,7 @@ public class Paragraph {
 		words+=" "+moreWords.trim();
 		return words;
 	}
-	/*Format method
-	 * while (words not empty)
-	 * calculate leading spaces
-	 * first line spaces (hanging indent)
-	 * left indent and first line adj
-	 * 
-	 * not first line
-	 * left indent
-	 * 
-	 * if words.length less than max line length
-	 * (true)
-	 * add remaining words to the paragraph
-	 * 
-	 * (false)
-	 * need to cut: don't cut the word.
-	 * find last space:
-	 * 	lastIndexOf(" ");
-	 * 	cut words at that index (substring), add \n to end of substring, to that it will be seperate line.
-	 * 	add to paragraph
-	*/
+	
 	public String format(ParaStyle ps){
 		String firstLineIndent="";
 		String allLineIndent="";
