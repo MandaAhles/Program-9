@@ -53,6 +53,7 @@ public class ParagraphDriver {
 		String styleIndicate="";
 		ParaStyle paraStyle=null;
 		boolean styleMatch=false;
+		boolean endDoc=false;
 		Paragraph p;
 		String paragraph="";
 		//put while (docScanner.hasNext()) here
@@ -84,9 +85,12 @@ public class ParagraphDriver {
 				//no else. always going to be at least one line after .P line.
 				
 				//keep going.
-				while(nextLine.indexOf(".P")<0){
+				while(nextLine.indexOf(".P")<0 && endDoc==false){
 					p.addWords(nextLine);
-					nextLine=docScanner.nextLine();
+					if(docScanner.hasNext())
+						nextLine=docScanner.nextLine();
+					else
+						endDoc=true;
 				}
 				//kicked out of loop, so must have ".P". Format paragraph as is first.
 				paragraph=p.format(paraStyle);

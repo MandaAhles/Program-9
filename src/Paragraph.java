@@ -100,7 +100,8 @@ public class Paragraph {
 			
 		}
 		//paragraph+=firstLine+words;
-		System.out.println();
+		//System.out.println();
+		paragraph+="\n";//final space after paragraph.
 		return paragraph;
 	}//end format
 	
