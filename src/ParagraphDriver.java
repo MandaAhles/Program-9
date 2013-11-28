@@ -3,10 +3,8 @@ import java.io.*;
 
 public class ParagraphDriver {
 /**
- *updated 11/27
- *
- * read style file card create objects for them
- * reading lines(getty.txt)
+ *updated 11/28
+ 
  */
 	public static void main(String[] args){
 		ArrayList<ParaStyle> styles;
@@ -25,9 +23,9 @@ public class ParagraphDriver {
 			System.out.println("Enter output file name: ");
 			fileOut=new PrintWriter(sc.next());
 		}catch(FileNotFoundException e){
-			System.out.println(e.getMessage());
+			System.out.println("This file does not exist or cannot be opened.");
 			return;
-		}catch(IOException e){//this should go somewhere else.
+		}catch(IOException e){//this should go somewhere else?
 			System.out.println(e.getMessage());
 			return;
 		}
