@@ -47,7 +47,7 @@ public class ParagraphDriver {
 	}
 	public static void formatDocument(Scanner docScanner, PrintWriter outputFileWriter, 
 			ArrayList<ParaStyle> styles){
-		//read in from docScanner line by line.
+		//variables:
 		String nextLine="";
 		String firstLine="";
 		String styleIndicate="";
@@ -56,10 +56,12 @@ public class ParagraphDriver {
 		boolean endDoc=false;
 		Paragraph p;
 		String paragraph="";
-		//put while (docScanner.hasNext()) here
-		//look for ".P"
-		nextLine=docScanner.nextLine();
 		int posDotP=0;
+		
+		//read in from docScanner line by line.
+		nextLine=docScanner.nextLine();
+		
+		//look for ".P"
 		//if line has ".P"
 		do{
 			if (posDotP>=0){//contains ".P"
@@ -73,7 +75,7 @@ public class ParagraphDriver {
 						styleMatch=true;
 					}
 				}
-				//get next lines.
+				//get first line after .P line
 				nextLine=docScanner.nextLine();
 				if(nextLine.indexOf(".P")<0){
 					//not a new paragr, first line of paragraph.
@@ -82,8 +84,6 @@ public class ParagraphDriver {
 					nextLine=docScanner.nextLine();
 					
 				}
-				//no else. always going to be at least one line after .P line.
-				
 				//keep going.
 				while(nextLine.indexOf(".P")<0 && endDoc==false){
 					p.addWords(nextLine);
@@ -99,41 +99,7 @@ public class ParagraphDriver {
 				outputFileWriter.flush();
 			}
 		}while(docScanner.hasNext());
-		//no else
-		
+		System.out.println("Document fomatting complete.");
 	}
- /* (index of for ".P")
- * if line has ".P"
- * search for the style name "para1" or "para2" of "para3"
- * new Paragraph:
- * send it to Paragraph class and read in as one long string (words)
- * 
- * if no .P
- * use addWords method
- * 	words+=" "+moreWords.trim();
- * 
- * Format method
- * while (words not empty)
- * calculate leading spaces
- * first line spaces (hanging indent)
- * left indent and first line adj
- * 
- * not first line
- * left indent
- * 
- * if words.length less than max line length
- * (true)
- * add remaining words to the paragraph
- * 
- * (false)
- * need to cut: don't cut the word.
- * find last space:
- * 	lastIndexOf(" ");
- * 	cut words at that index (substring), add \n to end of substring, to that it will be seperate line.
- * 	add to paragraph
- * 
- * 
- * 
- */
-	
+ 
 }
