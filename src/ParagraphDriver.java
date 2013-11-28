@@ -60,38 +60,41 @@ public class ParagraphDriver {
 		nextLine=docScanner.nextLine();
 		int posDotP=0;
 		//if line has ".P"
-		if (posDotP>=0){//contains ".P"
-			//search for the style name (ie: "para1" or "para2" of "para3")
-			p=new Paragraph();
-			styleIndicate=nextLine.substring(posDotP+2, nextLine.length()).trim();
-			styleMatch=false;
-			for(int i=0; i<styles.size() && styleMatch==false; i++){
-				if(styles.get(i).getName().equals(styleIndicate)){//set paraStyle for use in p.format
-					paraStyle=styles.get(i);
-					styleMatch=true;
+		do{
+			if (posDotP>=0){//contains ".P"
+				//search for the style name (ie: "para1" or "para2" of "para3")
+				p=new Paragraph();
+				styleIndicate=nextLine.substring(posDotP+2, nextLine.length()).trim();
+				styleMatch=false;
+				for(int i=0; i<styles.size() && styleMatch==false; i++){
+					if(styles.get(i).getName().equals(styleIndicate)){//set paraStyle for use in p.format
+						paraStyle=styles.get(i);
+						styleMatch=true;
+					}
 				}
-			}
-			//get next lines.
-			nextLine=docScanner.nextLine();
-			if(nextLine.indexOf(".P")<0){
-				//not a new paragr, first line of paragraph.
-				firstLine=nextLine;
-				p.startParagraph(firstLine);
+				//get next lines.
 				nextLine=docScanner.nextLine();
+				if(nextLine.indexOf(".P")<0){
+					//not a new paragr, first line of paragraph.
+					firstLine=nextLine;
+					p.startParagraph(firstLine);
+					nextLine=docScanner.nextLine();
+					
+				}
+				//no else. always going to be at least one line after .P line.
 				
+				//keep going.
+				while(nextLine.indexOf(".P")<0){
+					p.addWords(nextLine);
+					nextLine=docScanner.nextLine();
+				}
+				//kicked out of loop, so must have ".P". Format paragraph as is first.
+				paragraph=p.format(paraStyle);
+				//print to output file
+				outputFileWriter.println(paragraph);
+				outputFileWriter.flush();
 			}
-			//no else. always going to be at least one line after .P line.
-			
-			//keep going.
-			while(nextLine.indexOf(".P")<0){
-				p.addWords(nextLine);
-				nextLine=docScanner.nextLine();
-			}
-			//kicked out of loop, so must have ".P". Format paragraph as is first.
-			paragraph=p.format(paraStyle);
-			//print (to output1)
-			System.out.println(paragraph);
-		}
+		}while(docScanner.hasNext());
 		//no else
 		
 	}
